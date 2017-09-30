@@ -104,6 +104,51 @@ class Person:
             i += 1
 
 
+    def choose_target(self, enemies):
+        i = 1
+        print("\n" + bcolors.FAIL + bcolors.BOLD + "    Target:" + bcolors.ENDC)
+        for enemy in enemies:
+            print("        " + str(i) + "." + enemy.name)
+            i += 1
+            #needs to be minus one to go correctly with the array
+            #enemy 1 is in position 0
+        choice = int(input("    Choose target:")) - 1
+        return choice
+
+
+
+    def get_enemy_stats(self):
+        hp_bar = ""
+        #instead of having a 25 bar it will have a 50 bar
+        #2 for 50 4 for 25
+        bar_ticks = (self.hp / self.maxhp) * 100 / 2
+
+
+        while bar_ticks > 0:
+            hp_bar += "█"
+            bar_ticks -= 1
+
+        while len(hp_bar) < 50:
+            hp_bar += " "
+
+        hp_string = str(self.hp) + "/" + str(self.maxhp)
+        if len(hp_string) < 11:
+            decreased = 11 - len(hp_string)
+
+            while decreased > 0:
+                current_hp += " "
+                decreased -= 1
+
+
+            current_hp += hp_string
+        else:
+            current_hp = hp_string
+
+
+        print("                           __________________________________________________")
+        print(bcolors.BOLD + self.name + "    " +
+             current_hp +  "  |" + bcolors.FAIL + hp_bar + bcolors.ENDC + "|" )
+
     def get_stats(self):
         hp_bar = ""
         bar_ticks = (self.hp / self.maxhp) * 100 / 4
@@ -137,9 +182,9 @@ class Person:
                 current_hp += " "
                 decreased -= 1
 
-                current_hp += hp_string
-            else:
-                current_hp = hp_string
+            current_hp += hp_string
+        else:
+            current_hp = hp_string
 
 #mp format fix
         mp_string = str(self.mp) + "/" + str(self.maxmp)
@@ -150,9 +195,9 @@ class Person:
                 current_mp += " "
                 decreased -= 1
 
-                current_mp += hm_string
-            else:
-                current_mp = mp_string
+            current_mp += hm_string
+        else:
+            current_mp = mp_string
 
 
         print("                     _________________________            __________")
