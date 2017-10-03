@@ -187,3 +187,4 @@ class Person:
             self.choose_enemy_spell()
         else:
             return spell, magic_dmg
+#maybe add more inven and such
